@@ -1,34 +1,36 @@
 import React, { useState } from 'react'
 import SearchForm from './SearchForm';
 import ReportList from './ReportList';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { setRepositories } from '../Redux/Reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRepositories,setCurrentPage } from '../Redux/Reducer';
+
 
 
 const Home  = () => {
-  const repositories = useSelector((state)=>state.repositories);
-  const [currentPage, setCurrentPage] = useState(1);
-
+  const repositories = useSelector((state)=>state.repositories.repos);
+ 
+   const dispatch= useDispatch()
+ 
+  const currentPage= useSelector ((state)=>state.repositories.currentPage);
+  
   const handleSearch =(results)=>{
-    setRepositories(results);
+   dispatch (setRepositories(results));
   }
    const handlePageChange =(page)=>{
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
    }
   return (
 
    
-    <div>
-      <h1>Git Repository Search </h1>
-      <Link to="/" >Home</Link>
+    <div className='container'>
+      <h1 className='mt-5 mb-4'>Git Repository Search </h1>
+     
       
         
       <SearchForm onSearch={handleSearch} />
       {repositories.length > 0 ? (
         <ReportList 
-        repositories={repositories}
-        currentPage={currentPage}
+       
         onPageChange={handlePageChange}
         
         />

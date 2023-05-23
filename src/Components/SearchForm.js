@@ -24,15 +24,18 @@ const SearchForm = ({onSearch}) => {
 
 
   return (
-    <div>
+    <div className='mt-4 mb-4'>
         <form onSubmit={handleSubmit}>
+            <div className='input-group'>
             <input
             type='text'
+            className='form-control'
             value={query}
             onChange={(e)=> SetQuery(e.target.value)}
             placeholder='Enter a Search repo..'
             />
-            <button type='submit'> Search</button>
+            <button type='submit' className='btn btn-primary'> Search</button>
+            </div>
 
 
         </form>
